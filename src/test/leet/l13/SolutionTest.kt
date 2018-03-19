@@ -7,10 +7,11 @@ class SolutionTest {
     private val solution = Solution()
 
     @Test
-    fun romanToIntTest() {
-        assertEquals(1, solution.romanToInt("I"))
-        assertEquals(2, solution.romanToInt("II"))
-        assertEquals(4, solution.romanToInt("IV"))
-        assertEquals(988, solution.romanToInt("CMLXXXVIII"))
+    fun threeSumTest() {
+        assertEquals("I", solution.intToRoman(1))
+        assertEquals("III", solution.intToRoman(3))
+        assertEquals("IV", solution.intToRoman(4))
+        assertEquals("VII", solution.intToRoman(7))
+        assertEquals("CMLXXXVIII", solution.intToRoman(988))
     }
 }

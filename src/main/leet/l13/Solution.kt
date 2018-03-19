@@ -4,28 +4,41 @@ class Solution {
     /**
      * 1 - I | 5 - V | 10 - X | 50 - L | 100 - C | 500 - D | 1000 - M
      */
-    fun romanToInt(s: String): Int {
-        val romans = HashMap<Char, Int>()
-        romans['I'] = 1
-        romans['V'] = 5
-        romans['X'] = 10
-        romans['L'] = 50
-        romans['C'] = 100
-        romans['D'] = 500
-        romans['M'] = 1000
+    fun intToRoman(num: Int): String {
+        val romans = HashMap<Int, String>()
+        romans[1] = "I"
+        romans[5] = "V"
+        romans[10] = "X"
+        romans[50] = "L"
+        romans[100] = "C"
+        romans[500] = "D"
+        romans[1000] = "M"
 
-        var totalValue = 0
+        var numItr = num
+        var digitsItr = 1
+        var roman = ""
 
-        for((i, c ) in s.toCharArray().withIndex()) {
-            var charValue = romans[c]!!
+        while(numItr > 0) {
+            val digit = numItr % 10
+            var append = ""
 
-            if(i != s.length - 1 && romans[s.get(i+1)]!! > charValue) {
-                charValue = -charValue
+            if(digit >= 1 && digit <=3) {
+                append = romans[digitsItr]!!.repeat(digit)
+            } else if (digit == 4) {
+                append = romans[digitsItr]!! + romans[digitsItr * 5]!!
+            } else if (digit == 5) {
+                append = romans[digitsItr * 5]!!
+            } else if (digit >= 6 && digit <=8) {
+                append = romans[digitsItr * 5]!! + romans[digitsItr]!!.repeat(digit-5)
+            } else if (digit == 9) {
+                append = romans[digitsItr]!! + romans[digitsItr * 10]
             }
 
-            totalValue += charValue
+            roman = append + roman
+            digitsItr *= 10
+            numItr /= 10
         }
 
-        return totalValue
+        return roman
     }
 }
